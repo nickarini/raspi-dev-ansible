@@ -1,0 +1,16 @@
+---
+# hosts could have been "remote" or "all" as well
+- hosts: local
+  become: yes
+  become_user: pi
+  connection: local
+  tasks:
+   - name: Download Rust install script
+     get_url:
+       url: https://sh.rustup.rs
+       dest: /home/pi/rustup.sh
+       force: yes
+       mode: ug+x
+
+   - name: Install Rust
+     script: /home/pi/rustup.sh -y
